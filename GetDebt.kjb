@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <job>
   <name>GetDebt</name>
     <description/>
@@ -9,16 +8,21 @@
   <created_user>-</created_user>
   <created_date>2015&#x2f;05&#x2f;01 17&#x3a;06&#x3a;39.260</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;05&#x2f;01 17&#x3a;06&#x3a;39.260</modified_date>
+  <modified_date>2015&#x2f;06&#x2f;13 23&#x3a;17&#x3a;47.558</modified_date>
     <parameters>
         <parameter>
-            <name>Days</name>
-            <default_value>100</default_value>
+            <name>debtFile</name>
+            <default_value>&#x2f;home&#x2f;john&#x2f;debt.txt</default_value>
             <description/>
         </parameter>
         <parameter>
-            <name>LastDate</name>
-            <default_value>1900-01-01</default_value>
+            <name>defaultDate</name>
+            <default_value>1993-01-04</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>postUrl</name>
+            <default_value>view-source&#x3a;http&#x3a;&#x2f;&#x2f;www.treasurydirect.gov&#x2f;NP&#x2f;debt&#x2f;search&#x3f;startMonth&#x3d;&#x24;&#x7b;month&#x7d;&#x26;startDay&#x3d;&#x24;&#x7b;day&#x7d;&#x26;startYear&#x3d;&#x24;&#x7b;year&#x7d;&#x26;endMonth&#x3d;&#x24;&#x7b;endMonth&#x7d;&#x26;endDay&#x3d;&#x24;&#x7b;endDay&#x7d;&#x26;endYear&#x3d;&#x24;&#x7b;endYear&#x7d;</default_value>
             <description/>
         </parameter>
     </parameters>
@@ -65,46 +69,14 @@
       <yloc>75</yloc>
       </entry>
     <entry>
-      <name>GetLastDate</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;GetLastDate.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>194</xloc>
-      <yloc>76</yloc>
-      </entry>
-    <entry>
       <name>DownloadDebt</name>
       <description/>
       <type>TRANS</type>
-      <specification_method>filename</specification_method>
+      <specification_method>rep_name</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;DownloadDebt.ktr</filename>
-      <transname/>
+      <filename/>
+      <transname>DownloadDebt</transname>
+      <directory>&#x2f;</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -127,11 +99,64 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>310</xloc>
-      <yloc>76</yloc>
+      <xloc>492</xloc>
+      <yloc>77</yloc>
+      </entry>
+    <entry>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>716</xloc>
+      <yloc>77</yloc>
+      </entry>
+    <entry>
+      <name>GetLastDate</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>rep_name</specification_method>
+      <trans_object_id/>
+      <filename/>
+      <transname>GetLastDate</transname>
+      <directory>&#x2f;</directory>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>290</xloc>
+      <yloc>78</yloc>
       </entry>
   </entries>
   <hops>
+    <hop>
+      <from>DownloadDebt</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
     <hop>
       <from>START</from>
       <to>GetLastDate</to>
